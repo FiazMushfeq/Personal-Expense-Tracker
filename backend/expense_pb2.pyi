@@ -74,8 +74,8 @@ class GetSummaryRequest(_message.Message):
 class ListExpensesResponse(_message.Message):
     __slots__ = ("expenses",)
     EXPENSES_FIELD_NUMBER: _ClassVar[int]
-    expenses: Expense
-    def __init__(self, expenses: _Optional[_Union[Expense, _Mapping]] = ...) -> None: ...
+    expenses: _containers.RepeatedCompositeFieldContainer[Expense]
+    def __init__(self, expenses: _Optional[_Iterable[_Union[Expense, _Mapping]]] = ...) -> None: ...
 
 class CreateExpensesResponse(_message.Message):
     __slots__ = ("id", "error")

@@ -39,8 +39,8 @@ class ExpenseTrackerStub(object):
                 request_serializer=expense__pb2.ListExpensesRequest.SerializeToString,
                 response_deserializer=expense__pb2.ListExpensesResponse.FromString,
                 _registered_method=True)
-        self.AddExpenses = channel.unary_unary(
-                '/ExpenseTracker/AddExpenses',
+        self.CreateExpenses = channel.unary_unary(
+                '/ExpenseTracker/CreateExpenses',
                 request_serializer=expense__pb2.CreateExpensesRequest.SerializeToString,
                 response_deserializer=expense__pb2.CreateExpensesResponse.FromString,
                 _registered_method=True)
@@ -70,7 +70,7 @@ class ExpenseTrackerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def AddExpenses(self, request, context):
+    def CreateExpenses(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -102,8 +102,8 @@ def add_ExpenseTrackerServicer_to_server(servicer, server):
                     request_deserializer=expense__pb2.ListExpensesRequest.FromString,
                     response_serializer=expense__pb2.ListExpensesResponse.SerializeToString,
             ),
-            'AddExpenses': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddExpenses,
+            'CreateExpenses': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateExpenses,
                     request_deserializer=expense__pb2.CreateExpensesRequest.FromString,
                     response_serializer=expense__pb2.CreateExpensesResponse.SerializeToString,
             ),
@@ -161,7 +161,7 @@ class ExpenseTracker(object):
             _registered_method=True)
 
     @staticmethod
-    def AddExpenses(request,
+    def CreateExpenses(request,
             target,
             options=(),
             channel_credentials=None,
@@ -174,7 +174,7 @@ class ExpenseTracker(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ExpenseTracker/AddExpenses',
+            '/ExpenseTracker/CreateExpenses',
             expense__pb2.CreateExpensesRequest.SerializeToString,
             expense__pb2.CreateExpensesResponse.FromString,
             options,

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 service ExpenseTracker {
     rpc ListExpenses(ListExpensesRequest) returns (ListExpensesResponse) {}
-    rpc AddExpenses(CreateExpensesRequest) returns (CreateExpensesResponse) {}
+    rpc CreateExpenses(CreateExpensesRequest) returns (CreateExpensesResponse) {}
     rpc DeleteExpenses(DeleteExpensesRequest) returns (DeleteExpensesResponse) {}
     rpc UpdateExpenses(UpdateExpensesRequest) returns (UpdateExpensesResponse) {}
     rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {}
@@ -49,7 +49,7 @@ message GetSummaryRequest {
 }
 
 message ListExpensesResponse {
-    Expense expenses = 1;
+    repeated Expense expenses = 1;
 }
 
 message CreateExpensesResponse {
