@@ -18,28 +18,21 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         return expense_pb2.ListExpensesResponse(expenses=sample_expense_list)
 
     def CreateExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        return expense_pb2.CreateExpensesResponse(id=10, error="none")
 
     def DeleteExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        return expense_pb2.DeleteExpensesResponse(success=True)
 
     def UpdateExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        return expense_pb2.UpdateExpensesResponse(success=False)
 
     def GetSummary(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        sample_expense_list = [
+            expense_pb2.Expense(title='Lunch-Summary', amount=34.50, category=1, date="wednesday"),
+            expense_pb2.Expense(title='Dinner-Summary', amount=100.00, category=2, date="friday"),
+        ]
+        # print(sample_expense)
+        return expense_pb2.GetSummaryResponse(expenses=sample_expense_list)
     
 def serve():
     port = "50051"

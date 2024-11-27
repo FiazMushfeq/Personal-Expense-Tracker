@@ -45,7 +45,7 @@ message UpdateExpensesRequest {
 }
 
 message GetSummaryRequest {
-    ExpenseCategory ExpenseCategory = 1;
+    ExpenseCategory category = 1;
 }
 
 message ListExpensesResponse {

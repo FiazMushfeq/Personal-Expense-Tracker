@@ -66,10 +66,10 @@ class UpdateExpensesRequest(_message.Message):
     def __init__(self, id: _Optional[int] = ..., title: _Optional[str] = ..., amount: _Optional[float] = ..., category: _Optional[_Union[ExpenseCategory, str]] = ..., date: _Optional[str] = ...) -> None: ...
 
 class GetSummaryRequest(_message.Message):
-    __slots__ = ("ExpenseCategory",)
-    EXPENSECATEGORY_FIELD_NUMBER: _ClassVar[int]
-    ExpenseCategory: ExpenseCategory
-    def __init__(self, ExpenseCategory: _Optional[_Union[ExpenseCategory, str]] = ...) -> None: ...
+    __slots__ = ("category",)
+    CATEGORY_FIELD_NUMBER: _ClassVar[int]
+    category: ExpenseCategory
+    def __init__(self, category: _Optional[_Union[ExpenseCategory, str]] = ...) -> None: ...
 
 class ListExpensesResponse(_message.Message):
     __slots__ = ("expenses",)
