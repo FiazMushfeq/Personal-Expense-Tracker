@@ -14,6 +14,7 @@ def run():
     print("Client has been greeted!")
     with grpc.insecure_channel("localhost:50051") as channel:
         stub = expense_pb2_grpc.ExpenseTrackerStub(channel)
+        
         response = stub.ListExpenses(expense_pb2.ListExpensesRequest(date="day"))
         print("\nListExpenses:")
         print('\n'.join(f"{index+1}:\n{item}" for index, item in enumerate(response.expenses)))
@@ -21,7 +22,7 @@ def run():
         response = stub.CreateExpenses(expense_pb2.CreateExpensesRequest(
             title='Lunch',
             amount=100.00,
-            category=0,
+            category=expense_pb2.ExpenseCategory.FOOD,
             date="monday",
         ))
         print(str(response.id) + ": " + response.error)
@@ -32,7 +33,7 @@ def run():
         response = stub.UpdateExpenses(expense_pb2.UpdateExpensesRequest(id=5))
         print("\n" + str(response.success))
         
-        response = stub.GetSummary(expense_pb2.GetSummaryRequest(category=0))
+        response = stub.GetSummary(expense_pb2.GetSummaryRequest(category=expense_pb2.ExpenseCategory.TRAVEL))
         print("\nGetSummary:")
         print('\n'.join(f"{index+1}:\n{item}" for index, item in enumerate(response.expenses)))
         

@@ -11,27 +11,30 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
 
     def ListExpenses(self, request, context):
         sample_expense_list = [
-            expense_pb2.Expense(title='Lunch', amount=34.50, category=1, date="wednesday"),
-            expense_pb2.Expense(title='Dinner', amount=100.00, category=2, date="friday"),
+            expense_pb2.Expense(title='Lunch', amount=34.50, category=expense_pb2.FOOD, date="wednesday"),
+            expense_pb2.Expense(title='Dinner', amount=100.00, category=expense_pb2.FOOD, date="friday"),
         ]
-        # print(sample_expense)
+        print(f"ListExpenses:\n{request}")
         return expense_pb2.ListExpensesResponse(expenses=sample_expense_list)
 
     def CreateExpenses(self, request, context):
+        print(f"CreateExpenses:\n{request}")
         return expense_pb2.CreateExpensesResponse(id=10, error="none")
 
     def DeleteExpenses(self, request, context):
+        print(f"DeleteExpenses:\n{request}")
         return expense_pb2.DeleteExpensesResponse(success=True)
 
     def UpdateExpenses(self, request, context):
+        print(f"UpdateExpenses:\n{request}")
         return expense_pb2.UpdateExpensesResponse(success=False)
 
     def GetSummary(self, request, context):
         sample_expense_list = [
-            expense_pb2.Expense(title='Lunch-Summary', amount=34.50, category=1, date="wednesday"),
-            expense_pb2.Expense(title='Dinner-Summary', amount=100.00, category=2, date="friday"),
+            expense_pb2.Expense(title='Lunch-Summary', amount=34.50, category=expense_pb2.TRAVEL, date="wednesday"),
+            expense_pb2.Expense(title='Dinner-Summary', amount=100.00, category=expense_pb2.TRAVEL, date="friday"),
         ]
-        # print(sample_expense)
+        print(f"GetSummary:\n{request}")
         return expense_pb2.GetSummaryResponse(expenses=sample_expense_list)
     
 def serve():
@@ -40,7 +43,7 @@ def serve():
     expense_pb2_grpc.add_ExpenseTrackerServicer_to_server(ExpenseTrackerServicer(), server)
     server.add_insecure_port("[::]:" + port)
     server.start()
-    print("Server started, listening on " + port)
+    print("Server started, listening on " + port + "!\n")
     server.wait_for_termination()
 
 if __name__ == "__main__":
