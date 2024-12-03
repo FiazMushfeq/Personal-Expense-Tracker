@@ -8,6 +8,9 @@ import expense_pb2
 import expense_pb2_grpc
 
 class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
+    
+    expense_map = {}
+    id_iterator = 0
 
     def ListExpenses(self, request, context):
         sample_expense_list = [
@@ -15,15 +18,34 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
             expense_pb2.Expense(title='Dinner', amount=100.00, category=expense_pb2.FOOD, date="friday"),
         ]
         print(f"ListExpenses:\n{request}")
+        print(f"Expense Map:")
+        print(self.expense_map)
+        print()
         return expense_pb2.ListExpensesResponse(expenses=sample_expense_list)
 
     def CreateExpenses(self, request, context):
         print(f"CreateExpenses:\n{request}")
+        self.id_iterator += 1
+        self.expense_map[self.id_iterator] = request
+        print(f"Expense Map:")
+        print(self.expense_map)
+        print()
         return expense_pb2.CreateExpensesResponse(id=10, error="none")
 
     def DeleteExpenses(self, request, context):
         print(f"DeleteExpenses:\n{request}")
-        return expense_pb2.DeleteExpensesResponse(success=True)
+        have_value = True
+        key_value = str(request)[4:]
+        print(key_value)
+        print(self.expense_map.keys())
+        if key_value in self.expense_map:
+            del self.expense_map[int(key_value)]
+        else:
+            have_value = False
+        print(f"Expense Map:")
+        print(self.expense_map)
+        print()
+        return expense_pb2.DeleteExpensesResponse(success=have_value)
 
     def UpdateExpenses(self, request, context):
         print(f"UpdateExpenses:\n{request}")

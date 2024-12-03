@@ -27,7 +27,7 @@ def run():
         ))
         print(str(response.id) + ": " + response.error)
         
-        response = stub.DeleteExpenses(expense_pb2.DeleteExpensesRequest(id=7))
+        response = stub.DeleteExpenses(expense_pb2.DeleteExpensesRequest(id=1))
         print("\n" + str(response.success))
         
         response = stub.UpdateExpenses(expense_pb2.UpdateExpensesRequest(id=5))
