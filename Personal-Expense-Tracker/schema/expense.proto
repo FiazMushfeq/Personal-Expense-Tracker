@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+service ExpenseTracker {
+    rpc ListExpenses(ListExpensesRequest) returns (ListExpensesResponse) {}
+    rpc CreateExpenses(CreateExpensesRequest) returns (CreateExpensesResponse) {}
+    rpc DeleteExpenses(DeleteExpensesRequest) returns (DeleteExpensesResponse) {}
+    rpc UpdateExpenses(UpdateExpensesRequest) returns (UpdateExpensesResponse) {}
+    rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {}
+}
+
+enum ExpenseCategory {
+    FOOD = 0;
+    TRAVEL = 1;
+    SHOPPING = 2;
+}
+
+message Expense {
+    string title = 1;
+    double amount = 2;
+    ExpenseCategory category = 3;
+    string date = 4;
+}
+
+message ListExpensesRequest {
+    string date = 1;
+}
+
+message CreateExpensesRequest {
+    string title = 1;
+    double amount = 2;
+    ExpenseCategory category = 3;
+    string date = 4;
+}
+
+message DeleteExpensesRequest {
+    int32 id = 1;
+}
+
+message UpdateExpensesRequest {
+    int32 id = 1;
+    string title = 2;
+    double amount = 3;
+    ExpenseCategory category = 4;
+    string date = 5;
+}
+
+message GetSummaryRequest {
+    ExpenseCategory category = 1;
+}
+
+message ListExpensesResponse {
+    repeated Expense expenses = 1;
+}
+
+message CreateExpensesResponse {
+    int32 id = 1;
+    string error = 2;
+}
+
+message DeleteExpensesResponse {
+    bool success = 1;
+}
+
+message UpdateExpensesResponse {
+    bool success = 1;
+}
+
+message GetSummaryResponse {
+    repeated Expense expenses = 1;
+}
