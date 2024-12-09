@@ -1,42 +1,26 @@
 syntax = "proto3";
 
 service ExpenseTracker {
+    rpc CreateExpense(CreateExpenseRequest) returns (CreateExpenseResponse) {}
+    rpc DeleteExpense(DeleteExpenseRequest) returns (DeleteExpenseResponse) {}
+    rpc UpdateExpense(UpdateExpenseRequest) returns (UpdateExpenseResponse) {}
+    rpc GetExpense(GetExpenseRequest) returns (GetExpenseResponse) {}
     rpc ListExpenses(ListExpensesRequest) returns (ListExpensesResponse) {}
-    rpc CreateExpenses(CreateExpensesRequest) returns (CreateExpensesResponse) {}
-    rpc DeleteExpenses(DeleteExpensesRequest) returns (DeleteExpensesResponse) {}
-    rpc UpdateExpenses(UpdateExpensesRequest) returns (UpdateExpensesResponse) {}
-    rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {}
 }
 
 enum ExpenseCategory {
-    FOOD = 0;
-    TRAVEL = 1;
-    SHOPPING = 2;
+    UNKNOWN = 0;
+    FOOD = 1;
+    TRANSPORT = 2;
+    SHOPPING = 3;
+    ENTERTAINMENT = 4;
+    BILLS = 5;
+    EDUCATION = 6;
+    HEALTH = 7;
+    OTHER = 8;
 }
 
 message Expense {
-    string title = 1;
-    double amount = 2;
-    ExpenseCategory category = 3;
-    string date = 4;
-}
-
-message ListExpensesRequest {
-    string date = 1;
-}
-
-message CreateExpensesRequest {
-    string title = 1;
-    double amount = 2;
-    ExpenseCategory category = 3;
-    string date = 4;
-}
-
-message DeleteExpensesRequest {
-    int32 id = 1;
-}
-
-message UpdateExpensesRequest {
     int32 id = 1;
     string title = 2;
     double amount = 3;
@@ -44,27 +28,49 @@ message UpdateExpensesRequest {
     string date = 5;
 }
 
-message GetSummaryRequest {
-    ExpenseCategory category = 1;
+message CreateExpenseRequest {
+    Expense expense = 1;
+}
+
+message DeleteExpenseRequest {
+    int32 id = 1;
+}
+
+message UpdateExpenseRequest {
+    Expense expense = 1;
+}
+
+message GetExpenseRequest {
+    int32 id = 1;
+}
+
+message ListExpensesRequest {
+    string date = 1;
+}
+
+message CreateExpenseResponse {
+    int32 id = 1;
+    string error = 2;
+}
+
+message DeleteExpenseResponse {
+    bool success = 1;
+}
+
+message UpdateExpenseResponse {
+    bool success = 1;
+}
+
+message GetExpenseResponse {
+    Expense expenses = 1;
+    SuccessStatus status = 2;
 }
 
 message ListExpensesResponse {
     repeated Expense expenses = 1;
 }
 
-message CreateExpensesResponse {
-    int32 id = 1;
-    string error = 2;
-}
-
-message DeleteExpensesResponse {
-    bool success = 1;
-}
-
-message UpdateExpensesResponse {
-    bool success = 1;
-}
-
-message GetSummaryResponse {
-    repeated Expense expenses = 1;
+message SuccessStatus {
+    int32 code = 1;
+    string msg = 2;
 }

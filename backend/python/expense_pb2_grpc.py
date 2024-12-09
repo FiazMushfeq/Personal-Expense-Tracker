@@ -34,61 +34,61 @@ class ExpenseTrackerStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.CreateExpense = channel.unary_unary(
+                '/ExpenseTracker/CreateExpense',
+                request_serializer=expense__pb2.CreateExpenseRequest.SerializeToString,
+                response_deserializer=expense__pb2.CreateExpenseResponse.FromString,
+                _registered_method=True)
+        self.DeleteExpense = channel.unary_unary(
+                '/ExpenseTracker/DeleteExpense',
+                request_serializer=expense__pb2.DeleteExpenseRequest.SerializeToString,
+                response_deserializer=expense__pb2.DeleteExpenseResponse.FromString,
+                _registered_method=True)
+        self.UpdateExpense = channel.unary_unary(
+                '/ExpenseTracker/UpdateExpense',
+                request_serializer=expense__pb2.UpdateExpenseRequest.SerializeToString,
+                response_deserializer=expense__pb2.UpdateExpenseResponse.FromString,
+                _registered_method=True)
+        self.GetExpense = channel.unary_unary(
+                '/ExpenseTracker/GetExpense',
+                request_serializer=expense__pb2.GetExpenseRequest.SerializeToString,
+                response_deserializer=expense__pb2.GetExpenseResponse.FromString,
+                _registered_method=True)
         self.ListExpenses = channel.unary_unary(
                 '/ExpenseTracker/ListExpenses',
                 request_serializer=expense__pb2.ListExpensesRequest.SerializeToString,
                 response_deserializer=expense__pb2.ListExpensesResponse.FromString,
-                _registered_method=True)
-        self.CreateExpenses = channel.unary_unary(
-                '/ExpenseTracker/CreateExpenses',
-                request_serializer=expense__pb2.CreateExpensesRequest.SerializeToString,
-                response_deserializer=expense__pb2.CreateExpensesResponse.FromString,
-                _registered_method=True)
-        self.DeleteExpenses = channel.unary_unary(
-                '/ExpenseTracker/DeleteExpenses',
-                request_serializer=expense__pb2.DeleteExpensesRequest.SerializeToString,
-                response_deserializer=expense__pb2.DeleteExpensesResponse.FromString,
-                _registered_method=True)
-        self.UpdateExpenses = channel.unary_unary(
-                '/ExpenseTracker/UpdateExpenses',
-                request_serializer=expense__pb2.UpdateExpensesRequest.SerializeToString,
-                response_deserializer=expense__pb2.UpdateExpensesResponse.FromString,
-                _registered_method=True)
-        self.GetSummary = channel.unary_unary(
-                '/ExpenseTracker/GetSummary',
-                request_serializer=expense__pb2.GetSummaryRequest.SerializeToString,
-                response_deserializer=expense__pb2.GetSummaryResponse.FromString,
                 _registered_method=True)
 
 
 class ExpenseTrackerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
+    def CreateExpense(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteExpense(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateExpense(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetExpense(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CreateExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DeleteExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateExpenses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetSummary(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -97,30 +97,30 @@ class ExpenseTrackerServicer(object):
 
 def add_ExpenseTrackerServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'CreateExpense': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateExpense,
+                    request_deserializer=expense__pb2.CreateExpenseRequest.FromString,
+                    response_serializer=expense__pb2.CreateExpenseResponse.SerializeToString,
+            ),
+            'DeleteExpense': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteExpense,
+                    request_deserializer=expense__pb2.DeleteExpenseRequest.FromString,
+                    response_serializer=expense__pb2.DeleteExpenseResponse.SerializeToString,
+            ),
+            'UpdateExpense': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateExpense,
+                    request_deserializer=expense__pb2.UpdateExpenseRequest.FromString,
+                    response_serializer=expense__pb2.UpdateExpenseResponse.SerializeToString,
+            ),
+            'GetExpense': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetExpense,
+                    request_deserializer=expense__pb2.GetExpenseRequest.FromString,
+                    response_serializer=expense__pb2.GetExpenseResponse.SerializeToString,
+            ),
             'ListExpenses': grpc.unary_unary_rpc_method_handler(
                     servicer.ListExpenses,
                     request_deserializer=expense__pb2.ListExpensesRequest.FromString,
                     response_serializer=expense__pb2.ListExpensesResponse.SerializeToString,
-            ),
-            'CreateExpenses': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateExpenses,
-                    request_deserializer=expense__pb2.CreateExpensesRequest.FromString,
-                    response_serializer=expense__pb2.CreateExpensesResponse.SerializeToString,
-            ),
-            'DeleteExpenses': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteExpenses,
-                    request_deserializer=expense__pb2.DeleteExpensesRequest.FromString,
-                    response_serializer=expense__pb2.DeleteExpensesResponse.SerializeToString,
-            ),
-            'UpdateExpenses': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateExpenses,
-                    request_deserializer=expense__pb2.UpdateExpensesRequest.FromString,
-                    response_serializer=expense__pb2.UpdateExpensesResponse.SerializeToString,
-            ),
-            'GetSummary': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetSummary,
-                    request_deserializer=expense__pb2.GetSummaryRequest.FromString,
-                    response_serializer=expense__pb2.GetSummaryResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -132,6 +132,114 @@ def add_ExpenseTrackerServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class ExpenseTracker(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def CreateExpense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ExpenseTracker/CreateExpense',
+            expense__pb2.CreateExpenseRequest.SerializeToString,
+            expense__pb2.CreateExpenseResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteExpense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ExpenseTracker/DeleteExpense',
+            expense__pb2.DeleteExpenseRequest.SerializeToString,
+            expense__pb2.DeleteExpenseResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateExpense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ExpenseTracker/UpdateExpense',
+            expense__pb2.UpdateExpenseRequest.SerializeToString,
+            expense__pb2.UpdateExpenseResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetExpense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ExpenseTracker/GetExpense',
+            expense__pb2.GetExpenseRequest.SerializeToString,
+            expense__pb2.GetExpenseResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def ListExpenses(request,
@@ -150,114 +258,6 @@ class ExpenseTracker(object):
             '/ExpenseTracker/ListExpenses',
             expense__pb2.ListExpensesRequest.SerializeToString,
             expense__pb2.ListExpensesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def CreateExpenses(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ExpenseTracker/CreateExpenses',
-            expense__pb2.CreateExpensesRequest.SerializeToString,
-            expense__pb2.CreateExpensesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def DeleteExpenses(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ExpenseTracker/DeleteExpenses',
-            expense__pb2.DeleteExpensesRequest.SerializeToString,
-            expense__pb2.DeleteExpensesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def UpdateExpenses(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ExpenseTracker/UpdateExpenses',
-            expense__pb2.UpdateExpensesRequest.SerializeToString,
-            expense__pb2.UpdateExpensesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetSummary(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ExpenseTracker/GetSummary',
-            expense__pb2.GetSummaryRequest.SerializeToString,
-            expense__pb2.GetSummaryResponse.FromString,
             options,
             channel_credentials,
             insecure,
