@@ -120,38 +120,40 @@ const CreateExpenseResponse$json = {
   '1': 'CreateExpenseResponse',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
-    {'1': 'error', '3': 2, '4': 1, '5': 9, '10': 'error'},
+    {'1': 'status', '3': 2, '4': 1, '5': 11, '6': '.SuccessStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `CreateExpenseResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createExpenseResponseDescriptor = $convert.base64Decode(
-    'ChVDcmVhdGVFeHBlbnNlUmVzcG9uc2USDgoCaWQYASABKAVSAmlkEhQKBWVycm9yGAIgASgJUg'
-    'VlcnJvcg==');
+    'ChVDcmVhdGVFeHBlbnNlUmVzcG9uc2USDgoCaWQYASABKAVSAmlkEiYKBnN0YXR1cxgCIAEoCz'
+    'IOLlN1Y2Nlc3NTdGF0dXNSBnN0YXR1cw==');
 
 @$core.Deprecated('Use deleteExpenseResponseDescriptor instead')
 const DeleteExpenseResponse$json = {
   '1': 'DeleteExpenseResponse',
   '2': [
-    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.SuccessStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `DeleteExpenseResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteExpenseResponseDescriptor = $convert.base64Decode(
-    'ChVEZWxldGVFeHBlbnNlUmVzcG9uc2USGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2Vzcw==');
+    'ChVEZWxldGVFeHBlbnNlUmVzcG9uc2USJgoGc3RhdHVzGAEgASgLMg4uU3VjY2Vzc1N0YXR1c1'
+    'IGc3RhdHVz');
 
 @$core.Deprecated('Use updateExpenseResponseDescriptor instead')
 const UpdateExpenseResponse$json = {
   '1': 'UpdateExpenseResponse',
   '2': [
-    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.SuccessStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `UpdateExpenseResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateExpenseResponseDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVFeHBlbnNlUmVzcG9uc2USGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2Vzcw==');
+    'ChVVcGRhdGVFeHBlbnNlUmVzcG9uc2USJgoGc3RhdHVzGAEgASgLMg4uU3VjY2Vzc1N0YXR1c1'
+    'IGc3RhdHVz');
 
 @$core.Deprecated('Use getExpenseResponseDescriptor instead')
 const GetExpenseResponse$json = {

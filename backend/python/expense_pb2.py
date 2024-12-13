@@ -24,15 +24,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rexpense.proto\"f\n\x07\x45xpense\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x01\x12\"\n\x08\x63\x61tegory\x18\x04 \x01(\x0e\x32\x10.ExpenseCategory\x12\x0c\n\x04\x64\x61te\x18\x05 \x01(\t\"1\n\x14\x43reateExpenseRequest\x12\x19\n\x07\x65xpense\x18\x01 \x01(\x0b\x32\x08.Expense\"\"\n\x14\x44\x65leteExpenseRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"1\n\x14UpdateExpenseRequest\x12\x19\n\x07\x65xpense\x18\x01 \x01(\x0b\x32\x08.Expense\"\x1f\n\x11GetExpenseRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"#\n\x13ListExpensesRequest\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\"2\n\x15\x43reateExpenseResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"(\n\x15\x44\x65leteExpenseResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"(\n\x15UpdateExpenseResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"P\n\x12GetExpenseResponse\x12\x1a\n\x08\x65xpenses\x18\x01 \x01(\x0b\x32\x08.Expense\x12\x1e\n\x06status\x18\x02 \x01(\x0b\x32\x0e.SuccessStatus\"2\n\x14ListExpensesResponse\x12\x1a\n\x08\x65xpenses\x18\x01 \x03(\x0b\x32\x08.Expense\"*\n\rSuccessStatus\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03msg\x18\x02 \x01(\t*\x89\x01\n\x0f\x45xpenseCategory\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x46OOD\x10\x01\x12\r\n\tTRANSPORT\x10\x02\x12\x0c\n\x08SHOPPING\x10\x03\x12\x11\n\rENTERTAINMENT\x10\x04\x12\t\n\x05\x42ILLS\x10\x05\x12\r\n\tEDUCATION\x10\x06\x12\n\n\x06HEALTH\x10\x07\x12\t\n\x05OTHER\x10\x08\x32\xce\x02\n\x0e\x45xpenseTracker\x12@\n\rCreateExpense\x12\x15.CreateExpenseRequest\x1a\x16.CreateExpenseResponse\"\x00\x12@\n\rDeleteExpense\x12\x15.DeleteExpenseRequest\x1a\x16.DeleteExpenseResponse\"\x00\x12@\n\rUpdateExpense\x12\x15.UpdateExpenseRequest\x1a\x16.UpdateExpenseResponse\"\x00\x12\x37\n\nGetExpense\x12\x12.GetExpenseRequest\x1a\x13.GetExpenseResponse\"\x00\x12=\n\x0cListExpenses\x12\x14.ListExpensesRequest\x1a\x15.ListExpensesResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rexpense.proto\"f\n\x07\x45xpense\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x01\x12\"\n\x08\x63\x61tegory\x18\x04 \x01(\x0e\x32\x10.ExpenseCategory\x12\x0c\n\x04\x64\x61te\x18\x05 \x01(\t\"1\n\x14\x43reateExpenseRequest\x12\x19\n\x07\x65xpense\x18\x01 \x01(\x0b\x32\x08.Expense\"\"\n\x14\x44\x65leteExpenseRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"1\n\x14UpdateExpenseRequest\x12\x19\n\x07\x65xpense\x18\x01 \x01(\x0b\x32\x08.Expense\"\x1f\n\x11GetExpenseRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"#\n\x13ListExpensesRequest\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\"C\n\x15\x43reateExpenseResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x1e\n\x06status\x18\x02 \x01(\x0b\x32\x0e.SuccessStatus\"7\n\x15\x44\x65leteExpenseResponse\x12\x1e\n\x06status\x18\x01 \x01(\x0b\x32\x0e.SuccessStatus\"7\n\x15UpdateExpenseResponse\x12\x1e\n\x06status\x18\x01 \x01(\x0b\x32\x0e.SuccessStatus\"O\n\x12GetExpenseResponse\x12\x19\n\x07\x65xpense\x18\x01 \x01(\x0b\x32\x08.Expense\x12\x1e\n\x06status\x18\x02 \x01(\x0b\x32\x0e.SuccessStatus\"2\n\x14ListExpensesResponse\x12\x1a\n\x08\x65xpenses\x18\x01 \x03(\x0b\x32\x08.Expense\"*\n\rSuccessStatus\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03msg\x18\x02 \x01(\t*\x89\x01\n\x0f\x45xpenseCategory\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x46OOD\x10\x01\x12\r\n\tTRANSPORT\x10\x02\x12\x0c\n\x08SHOPPING\x10\x03\x12\x11\n\rENTERTAINMENT\x10\x04\x12\t\n\x05\x42ILLS\x10\x05\x12\r\n\tEDUCATION\x10\x06\x12\n\n\x06HEALTH\x10\x07\x12\t\n\x05OTHER\x10\x08\x32\xce\x02\n\x0e\x45xpenseTracker\x12@\n\rCreateExpense\x12\x15.CreateExpenseRequest\x1a\x16.CreateExpenseResponse\"\x00\x12@\n\rDeleteExpense\x12\x15.DeleteExpenseRequest\x1a\x16.DeleteExpenseResponse\"\x00\x12@\n\rUpdateExpense\x12\x15.UpdateExpenseRequest\x1a\x16.UpdateExpenseResponse\"\x00\x12\x37\n\nGetExpense\x12\x12.GetExpenseRequest\x1a\x13.GetExpenseResponse\"\x00\x12=\n\x0cListExpenses\x12\x14.ListExpensesRequest\x1a\x15.ListExpensesResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'expense_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_EXPENSECATEGORY']._serialized_start=644
-  _globals['_EXPENSECATEGORY']._serialized_end=781
+  _globals['_EXPENSECATEGORY']._serialized_start=690
+  _globals['_EXPENSECATEGORY']._serialized_end=827
   _globals['_EXPENSE']._serialized_start=17
   _globals['_EXPENSE']._serialized_end=119
   _globals['_CREATEEXPENSEREQUEST']._serialized_start=121
@@ -46,17 +46,17 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_LISTEXPENSESREQUEST']._serialized_start=292
   _globals['_LISTEXPENSESREQUEST']._serialized_end=327
   _globals['_CREATEEXPENSERESPONSE']._serialized_start=329
-  _globals['_CREATEEXPENSERESPONSE']._serialized_end=379
-  _globals['_DELETEEXPENSERESPONSE']._serialized_start=381
-  _globals['_DELETEEXPENSERESPONSE']._serialized_end=421
-  _globals['_UPDATEEXPENSERESPONSE']._serialized_start=423
-  _globals['_UPDATEEXPENSERESPONSE']._serialized_end=463
-  _globals['_GETEXPENSERESPONSE']._serialized_start=465
-  _globals['_GETEXPENSERESPONSE']._serialized_end=545
-  _globals['_LISTEXPENSESRESPONSE']._serialized_start=547
-  _globals['_LISTEXPENSESRESPONSE']._serialized_end=597
-  _globals['_SUCCESSSTATUS']._serialized_start=599
-  _globals['_SUCCESSSTATUS']._serialized_end=641
-  _globals['_EXPENSETRACKER']._serialized_start=784
-  _globals['_EXPENSETRACKER']._serialized_end=1118
+  _globals['_CREATEEXPENSERESPONSE']._serialized_end=396
+  _globals['_DELETEEXPENSERESPONSE']._serialized_start=398
+  _globals['_DELETEEXPENSERESPONSE']._serialized_end=453
+  _globals['_UPDATEEXPENSERESPONSE']._serialized_start=455
+  _globals['_UPDATEEXPENSERESPONSE']._serialized_end=510
+  _globals['_GETEXPENSERESPONSE']._serialized_start=512
+  _globals['_GETEXPENSERESPONSE']._serialized_end=591
+  _globals['_LISTEXPENSESRESPONSE']._serialized_start=593
+  _globals['_LISTEXPENSESRESPONSE']._serialized_end=643
+  _globals['_SUCCESSSTATUS']._serialized_start=645
+  _globals['_SUCCESSSTATUS']._serialized_end=687
+  _globals['_EXPENSETRACKER']._serialized_start=830
+  _globals['_EXPENSETRACKER']._serialized_end=1164
 # @@protoc_insertion_point(module_scope)

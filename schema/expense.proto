@@ -50,19 +50,19 @@ message ListExpensesRequest {
 
 message CreateExpenseResponse {
     int32 id = 1;
-    string error = 2;
+    SuccessStatus status = 2;
 }
 
 message DeleteExpenseResponse {
-    bool success = 1;
+    SuccessStatus status = 1;
 }
 
 message UpdateExpenseResponse {
-    bool success = 1;
+    SuccessStatus status = 1;
 }
 
 message GetExpenseResponse {
-    Expense expenses = 1;
+    Expense expense = 1;
     SuccessStatus status = 2;
 }
 

@@ -380,14 +380,14 @@ class ListExpensesRequest extends $pb.GeneratedMessage {
 class CreateExpenseResponse extends $pb.GeneratedMessage {
   factory CreateExpenseResponse({
     $core.int? id,
-    $core.String? error,
+    SuccessStatus? status,
   }) {
     final $result = create();
     if (id != null) {
       $result.id = id;
     }
-    if (error != null) {
-      $result.error = error;
+    if (status != null) {
+      $result.status = status;
     }
     return $result;
   }
@@ -397,7 +397,7 @@ class CreateExpenseResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateExpenseResponse', createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOS(2, _omitFieldNames ? '' : 'error')
+    ..aOM<SuccessStatus>(2, _omitFieldNames ? '' : 'status', subBuilder: SuccessStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -432,22 +432,24 @@ class CreateExpenseResponse extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get error => $_getSZ(1);
+  SuccessStatus get status => $_getN(1);
   @$pb.TagNumber(2)
-  set error($core.String v) { $_setString(1, v); }
+  set status(SuccessStatus v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasError() => $_has(1);
+  $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(2)
-  void clearError() => clearField(2);
+  void clearStatus() => clearField(2);
+  @$pb.TagNumber(2)
+  SuccessStatus ensureStatus() => $_ensure(1);
 }
 
 class DeleteExpenseResponse extends $pb.GeneratedMessage {
   factory DeleteExpenseResponse({
-    $core.bool? success,
+    SuccessStatus? status,
   }) {
     final $result = create();
-    if (success != null) {
-      $result.success = success;
+    if (status != null) {
+      $result.status = status;
     }
     return $result;
   }
@@ -456,7 +458,7 @@ class DeleteExpenseResponse extends $pb.GeneratedMessage {
   factory DeleteExpenseResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteExpenseResponse', createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOM<SuccessStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: SuccessStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -482,22 +484,24 @@ class DeleteExpenseResponse extends $pb.GeneratedMessage {
   static DeleteExpenseResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  SuccessStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set status(SuccessStatus v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearStatus() => clearField(1);
+  @$pb.TagNumber(1)
+  SuccessStatus ensureStatus() => $_ensure(0);
 }
 
 class UpdateExpenseResponse extends $pb.GeneratedMessage {
   factory UpdateExpenseResponse({
-    $core.bool? success,
+    SuccessStatus? status,
   }) {
     final $result = create();
-    if (success != null) {
-      $result.success = success;
+    if (status != null) {
+      $result.status = status;
     }
     return $result;
   }
@@ -506,7 +510,7 @@ class UpdateExpenseResponse extends $pb.GeneratedMessage {
   factory UpdateExpenseResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateExpenseResponse', createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOM<SuccessStatus>(1, _omitFieldNames ? '' : 'status', subBuilder: SuccessStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -532,13 +536,15 @@ class UpdateExpenseResponse extends $pb.GeneratedMessage {
   static UpdateExpenseResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  SuccessStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set status(SuccessStatus v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearStatus() => clearField(1);
+  @$pb.TagNumber(1)
+  SuccessStatus ensureStatus() => $_ensure(0);
 }
 
 class GetExpenseResponse extends $pb.GeneratedMessage {
