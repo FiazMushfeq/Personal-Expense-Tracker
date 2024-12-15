@@ -13,6 +13,7 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     expense_dict = {}
     
     def CreateExpense(self, request, context):
+        print(f"Create Expense's Request: {request}\n")
         self.iterator += 1
         expense = expense_pb2.Expense(
             id=self.iterator,
@@ -33,6 +34,7 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         return response
     
     def DeleteExpense(self, request, context):
+        print(f"Delete Expense's Request: {request}\n")
         try:
             del self.expense_dict[request.id]
             response = expense_pb2.DeleteExpenseResponse(
@@ -51,6 +53,7 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         return response
     
     def UpdateExpense(self, request, context):
+        print(f"Update Expense's Request: {request}\n")
         try:
             self.expense_dict[request.expense.id]
             self.expense_dict[request.expense.id] = request.expense
@@ -70,6 +73,7 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         return response
     
     def GetExpense(self, request, context):
+        print(f"Get Expense's Request: {request}\n")
         try:
             self.expense_dict[request.id]
             response = expense_pb2.GetExpenseResponse(
@@ -90,6 +94,7 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         return response
     
     def ListExpenses(self, request, context):
+        print(f"List Expenses' Request: {request}\n")
         expenses_dict = self.expense_dict
         expenses_ids = [expense_value for expense_value in expenses_dict.values() if expense_value.date == request.date]
         response = expense_pb2.ListExpensesResponse(
