@@ -115,7 +115,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                     setState(() {
                       _selectedDate = pickedDate;
                       _dateController.text =
-                          "${_selectedDate!.year}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.day.toString().padLeft(2, '0')}";
+                          "${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}";
                     });
                   }
                 },

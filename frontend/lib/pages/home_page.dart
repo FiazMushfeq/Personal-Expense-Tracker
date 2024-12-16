@@ -4,10 +4,12 @@ import 'package:personal_expense_tracker/services/expense.tracker.client.dart';
 
 class HomePage extends StatelessWidget {
   final ExpenseClient expenseClient;
-  const HomePage({required this.expenseClient, Key? key}) : super(key: key);
+  const HomePage({required this.expenseClient, super.key});
 
   Future<List<Expense>> _fetchExpenses() async {
-    return await expenseClient.listExpenses("2024-12-15");
+    DateTime today = DateTime.now();
+    String currentDate = '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+    return await expenseClient.listExpenses(currentDate);
   }
 
   @override

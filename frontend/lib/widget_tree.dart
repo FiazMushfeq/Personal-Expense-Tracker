@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/generated/expense.pb.dart';
 import 'package:personal_expense_tracker/pages/expense_page.dart';
 import 'package:personal_expense_tracker/pages/home_page.dart';
 import 'package:personal_expense_tracker/pages/summary_page.dart';
@@ -19,7 +18,7 @@ class _WidgetTreeState extends State<WidgetTree> {
   List<Widget> pages = [
     HomePage(expenseClient: ExpenseClient()),
     const ExpensePage(),
-    const SummaryPage(),
+    SummaryPage(expenseClient: ExpenseClient()),
   ];
 
   @override

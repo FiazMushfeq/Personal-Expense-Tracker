@@ -4,6 +4,7 @@ import '../generated/expense.pbgrpc.dart';
 class ExpenseClient {
   final ClientChannel channel;
   late final ExpenseTrackerClient stub;
+  int total = 0;
 
   ExpenseClient()
       : channel = ClientChannel(
@@ -22,6 +23,7 @@ class ExpenseClient {
     try {
       final response = await stub.createExpense(request);
       print(response);
+      total += 1;
       return response.status;
     } catch(e) {
       print('Error-Create: $e');
