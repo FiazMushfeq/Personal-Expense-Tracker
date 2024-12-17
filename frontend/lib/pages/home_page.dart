@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Text('No expenses found.');
+                  return const Text('NO EXPENSES FOUND');
                 } else {
                   final expenses = snapshot.data!;
                   return ListView.builder(

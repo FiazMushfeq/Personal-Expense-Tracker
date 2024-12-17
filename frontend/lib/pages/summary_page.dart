@@ -7,79 +7,103 @@ class SummaryPage extends StatelessWidget {
   final ExpenseClient expenseClient;
   const SummaryPage({required this.expenseClient, super.key});
 
-  Color _colorCategory(ExpenseCategory category) {
+  Color _getColorCategory(String category) {
     switch (category) {
-      case ExpenseCategory.FOOD:
+      case "FOOD":
         return Colors.blue;
-      case ExpenseCategory.TRANSPORT:
+      case "TRANSPORT":
         return Colors.green;
-      case ExpenseCategory.SHOPPING:
+      case "SHOPPING":
         return Colors.red;
-      case ExpenseCategory.ENTERTAINMENT:
+      case "ENTERTAINMENT":
         return Colors.purple;
-      case ExpenseCategory.BILLS:
+      case "BILLS":
         return Colors.yellow;
-      case ExpenseCategory.EDUCATION:
+      case "EDUCATION":
         return Colors.orange;
-      case ExpenseCategory.HEALTH:
+      case "HEALTH":
         return Colors.pink;
       default:
         return Colors.grey;
     }
   }
 
-  Map<ExpenseCategory, double> expensesByCategory() {
-    Map<ExpenseCategory, double> categoryTotals = {};
-    for (int i = 1; i <= expenseClient.total; i++) {
+  String _getStringCategory(ExpenseCategory category) {
+    switch (category) {
+      case ExpenseCategory.FOOD:
+        return "FOOD";
+      case ExpenseCategory.TRANSPORT:
+        return "TRANSPORT";
+      case ExpenseCategory.SHOPPING:
+        return "SHOPPING";
+      case ExpenseCategory.ENTERTAINMENT:
+        return "ENTERTAINMENT";
+      case ExpenseCategory.BILLS:
+        return "BILLS";
+      case ExpenseCategory.EDUCATION:
+        return "EDUCATION";
+      case ExpenseCategory.HEALTH:
+        return "HEALTH";
+      default:
+        return "OTHER/UKNOWN";
+    }
+  }
+
+  List<PieChartSectionData> getSections(Map<String, double> categoryTotals) {
+    return categoryTotals.entries.map((entry) {
+      return PieChartSectionData(
+        color: _getColorCategory(entry.key),
+        value: entry.value,
+        title: entry.key,
+      );
+    }).toList();
+  }
+
+  Future<Map<String, double>> fetchExpensesByCategory() async {
+    List<Expense> allExpenses = await expenseClient.listExpenses("");
+    Map<String, double> categoryTotals = {};
+
+    for (var expenses in allExpenses) {
       try {
-        Expense current = expenseClient.getExpense(i) as Expense;
-        print(current.category);
-        print(current.amount);
-        categoryTotals[current.category] =
-            current.amount + (categoryTotals[current.category] ?? 0);
+        categoryTotals[_getStringCategory(expenses.category)] =
+            expenses.amount + (categoryTotals[_getStringCategory(expenses.category)] ?? 0);
       } catch (e) {
-        print("Expense with this ID doesn't exist: $e");
+        print("Expense doesn't exist: $e");
       }
     }
-    print("Category Totals: $categoryTotals");
+    // print(categoryTotals);
     return categoryTotals;
   }
 
   @override
   Widget build(BuildContext context) {
-    Map<ExpenseCategory, double> categoryTotals = expensesByCategory();
-    print(categoryTotals);
-    List<PieChartSectionData> sections1 = categoryTotals.entries.map((entry) {
-      return PieChartSectionData(
-        color: _colorCategory(entry.key),
-        value: entry.value,
-        title: entry.key.toString().split('.').last,
-      );
-    }).toList();
-
-    List<PieChartSectionData> sections = [
-      PieChartSectionData(color: Colors.blue, value: 25, title: 'Food'),
-      PieChartSectionData(color: Colors.green, value: 20, title: 'Transport'),
-      PieChartSectionData(color: Colors.red, value: 15, title: 'Shopping'),
-      PieChartSectionData(
-          color: Colors.purple, value: 10, title: 'Entertainment'),
-      PieChartSectionData(color: Colors.yellow, value: 30, title: 'Bills'),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Summary Page'),
         centerTitle: true,
       ),
-      body: Center(
-        child: PieChart(
-          PieChartData(
-            sections: sections,
-            centerSpaceRadius: 40,
-            borderData: FlBorderData(show: false),
-            sectionsSpace: 2,
-          ),
-        ),
+      body: FutureBuilder<Map<String, double>>(
+        future: fetchExpensesByCategory(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No expenses found.'));
+          } else {
+            List<PieChartSectionData> sections = getSections(snapshot.data!);
+            return Center(
+              child: PieChart(
+                PieChartData(
+                  sections: sections,
+                  centerSpaceRadius: 40,
+                  borderData: FlBorderData(show: false),
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

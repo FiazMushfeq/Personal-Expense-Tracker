@@ -1,3 +1,7 @@
+// import 'dart:math';
+
+import 'dart:math';
+
 import 'package:grpc/grpc.dart';
 import '../generated/expense.pbgrpc.dart';
 
@@ -19,11 +23,13 @@ class ExpenseClient {
 
   Future<SuccessStatus> createExpense(Expense expense) async {
     final request = CreateExpenseRequest()..expense = expense;
+    // print(total);
     
     try {
       final response = await stub.createExpense(request);
-      print(response);
+      // print(response);
       total += 1;
+      // print("Total Count: $total");
       return response.status;
     } catch(e) {
       print('Error-Create: $e');
@@ -36,7 +42,7 @@ class ExpenseClient {
     
     try {
       final response = await stub.deleteExpense(request);
-      print(response);
+      // print(response);
     } catch(e) {
       print('Error-Delete: $e');
     }
@@ -47,7 +53,7 @@ class ExpenseClient {
 
     try {
       final response = await stub.updateExpense(request);
-      print(response);
+      // print(response);
     } catch(e) {
       print('Error-Update: $e');
     }
@@ -58,7 +64,7 @@ class ExpenseClient {
   
     try {
       final response = await stub.getExpense(request);
-      print(response);
+      // print(response);
       return response.expenses;
     } catch(e) {
       print('Error-Get: $e');
@@ -68,10 +74,10 @@ class ExpenseClient {
 
   Future<List<Expense>> listExpenses(String date) async {
     final request = ListExpensesRequest()..date = date;
-    
+    // print(request);
     try {
       final response = await stub.listExpenses(request);
-      print(response);
+      // print(response);
       return response.expenses;
     } catch(e) {
       print('Error-List: $e');
@@ -85,23 +91,27 @@ class ExpenseClient {
   }
 }
 
-// void main() async {
-//   print('\nStarted Client!\n');
-//   final client = ExpenseClient();
-//   Expense expense = Expense(
-//     id: 1,
-//     title: "expense #",
-//     amount: Random().nextDouble() * 100 + 1,
-//     category: ExpenseCategory.EDUCATION,
-//     date: "12/8/2024",
-//   );
+void main() async {
+  print('\nStarted Client!\n');
+  final client = ExpenseClient();
+  Expense expense = Expense(
+    id: 1,
+    title: "expense #",
+    amount: Random().nextDouble() * 100 + 1,
+    category: ExpenseCategory.EDUCATION,
+    date: "12/8/2024",
+  );
 
-//   await client.createExpense(expense);
-//   // await client.deleteExpense(1);
-//   // await client.updateExpense(expense);
-//   await client.getExpense(1);
-//   await client.getExpense(2);
-//   await client.listExpenses(expense.date);
+  await client.createExpense(expense);
+  await client.createExpense(expense);
+  await client.createExpense(expense);
+  // await client.deleteExpense(1);
+  // await client.updateExpense(expense);
+  await client.getExpense(1);
+  await client.getExpense(2);
+  await client.listExpenses(expense.date);
+  await client.listExpenses("");
+  print(client.total);
 
-//   await client.shutdown();
-// }
+  await client.shutdown();
+}
