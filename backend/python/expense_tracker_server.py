@@ -4,8 +4,13 @@ import math
 import time
 
 import grpc
-import expense_pb2
-import expense_pb2_grpc
+from generated.expense_pb2 import ExpenseCategory, Expense, GetExpenseResponse, ListExpensesResponse, UpdateExpenseResponse, DeleteExpenseResponse, CreateExpenseResponse, SuccessStatus
+import generated.expense_pb2_grpc as expense_pb2_grpc
+
+from database import PostgresDB
+
+db = PostgresDB(db_name="postgres", user="postgres", password="password")
+db.create_table()
 
 class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
@@ -14,38 +19,46 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
     def CreateExpense(self, request, context):
         print(f"Create Expense's Request:\n{request}\n")
-        self.iterator += 1
-        expense = expense_pb2.Expense(
-            id=self.iterator,
-            title=request.expense.title,
-            amount=request.expense.amount,
-            category=request.expense.category,
-            date=request.expense.date
-        )
-        self.expense_dict[self.iterator] = expense
         
-        response = expense_pb2.CreateExpenseResponse(
-            id=self.iterator,
-            status=expense_pb2.SuccessStatus(
-                code=1,
-                msg="GOOD-CreateExpense"
+        # self.iterator += 1
+        # expense = expense_pb2.Expense(
+        #     id=self.iterator,
+        #     title=request.expense.title,
+        #     amount=request.expense.amount,
+        #     category=request.expense.category,
+        #     date=request.expense.date
+        # )
+        # self.expense_dict[self.iterator] = expense
+        
+        expense = request.expense
+        new_id = db.insert_expense(
+            title=expense.title,
+            amount=expense.amount,
+            category=expense.category,
+            date=expense.date
+        )
+        
+        return CreateExpenseResponse(
+            id=new_id,
+            status=SuccessStatus(
+                code=0,
+                msg="SUCCESS --> CreateExpense"
             )
         )
-        return response
     
     def DeleteExpense(self, request, context):
         print(f"Delete Expense's Request:\n{request}\n")
         try:
             del self.expense_dict[request.id]
-            response = expense_pb2.DeleteExpenseResponse(
-                status=expense_pb2.SuccessStatus(
+            response = DeleteExpenseResponse(
+                status=SuccessStatus(
                     code=1,
                     msg="GOOD-DeleteExpense"
                 )
             )
         except Exception as e:
-            response = expense_pb2.DeleteExpenseResponse(
-                status=expense_pb2.SuccessStatus(
+            response = DeleteExpenseResponse(
+                status=SuccessStatus(
                     code=2,
                     msg="BAD-DeleteExpense"
                 )
@@ -57,15 +70,15 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         try:
             self.expense_dict[request.expense.id]
             self.expense_dict[request.expense.id] = request.expense
-            response = expense_pb2.UpdateExpenseResponse(
-                status=expense_pb2.SuccessStatus(
+            response = UpdateExpenseResponse(
+                status=SuccessStatus(
                     code=1,
                     msg="GOOD-UpdateExpense"
                 )
             )
         except Exception as e:
-            response = expense_pb2.UpdateExpenseResponse(
-                status=expense_pb2.SuccessStatus(
+            response = UpdateExpenseResponse(
+                status=SuccessStatus(
                     code=2,
                     msg="BAD-UpdateExpense"
                 )
@@ -76,17 +89,17 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         print(f"Get Expense's Request:\n{request}\n")
         try:
             self.expense_dict[request.id]
-            response = expense_pb2.GetExpenseResponse(
+            response = GetExpenseResponse(
                 expense=self.expense_dict[request.id],
-                status=expense_pb2.SuccessStatus(
+                status=SuccessStatus(
                     code=1,
                     msg="GOOD-GetExpense"
                 )
             )
         except Exception as e:
-            response = expense_pb2.GetExpenseResponse(
-                expense=expense_pb2.Expense(),
-                status=expense_pb2.SuccessStatus(
+            response = GetExpenseResponse(
+                expense=Expense(),
+                status=SuccessStatus(
                     code=2,
                     msg="BAD-GetExpense"
                 )
@@ -95,19 +108,32 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
     def ListExpenses(self, request, context):
         print(f"List Expenses' Request:\n{str(request).strip()}\n")
-        expenses_dict = self.expense_dict
-        if str(request.date).strip():
-            # print("request has date!")
-            expenses_ids = [expense_value for expense_value in expenses_dict.values() if expense_value.date == request.date]
-        else:
-            # print("get all!")
-            expenses_ids = [expense_value for expense_value in expenses_dict.values()]
         
-        response = expense_pb2.ListExpensesResponse(
-            expenses=expenses_ids
-        )
-        # print(response)
-        return response
+        # expenses_dict = self.expense_dict
+        # if str(request.date).strip():
+        #     # print("request has date!")
+        #     expenses_ids = [expense_value for expense_value in expenses_dict.values() if expense_value.date == request.date]
+        # else:
+        #     # print("get all!")
+        #     expenses_ids = [expense_value for expense_value in expenses_dict.values()]
+        
+        if request.date.strip() == "":
+            expenses_data = db.list_expenses()
+        else:
+            expenses_data = db.list_expenses(date=request.date)
+        
+        expenses = [
+            Expense(
+                id=row["id"],
+                title=row["title"],
+                amount=row["amount"],
+                category=row["category"],
+                date=row["expense_date"]
+            )
+            for row in expenses_data
+        ]
+        
+        return ListExpensesResponse(expenses=expenses)
     
 def serve():
     port = "50051"

@@ -1,3 +1,15 @@
 {
-    "cmake.sourceDirectory": "C:/Users/fiazm/Documents/Personal Expense Tracker/frontend/windows"
+    "cmake.sourceDirectory": "C:/Users/fiazm/Documents/Personal Expense Tracker/frontend/windows",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Postgres Local",
+            "database": "postgres",
+            "username": "postgres",
+            "password": "password"
+        }
+    ]
 }

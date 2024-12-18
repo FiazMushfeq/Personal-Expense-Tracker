@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import expense_pb2 as expense__pb2
+from . import expense_pb2 as expense__pb2
 
 GRPC_GENERATED_VERSION = '1.68.0'
 GRPC_VERSION = grpc.__version__
