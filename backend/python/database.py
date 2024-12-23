@@ -13,18 +13,6 @@ class PostgresDB:
         )
         self.connection.autocommit = True
         self.cursor = self.connection.cursor()
-        
-    def create_table(self):
-        create_table_query = """
-        CREATE TABLE IF NOT EXISTS expenses (
-        id SERIAL PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        amount NUMERIC(10, 2) NOT NULL,
-        category INTEGER NOT NULL,
-        expense_date VARCHAR(255) NOT NULL
-        );
-        """
-        self.cursor.execute(create_table_query)
     
     def insert_expense(self, title, amount, category, date):
         query = """

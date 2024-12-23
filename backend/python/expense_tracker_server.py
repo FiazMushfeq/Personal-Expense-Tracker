@@ -10,41 +10,34 @@ import generated.expense_pb2_grpc as expense_pb2_grpc
 from database import PostgresDB
 
 db = PostgresDB(db_name="postgres", user="postgres", password="password")
-db.create_table()
 
 class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
-    iterator = 0
-    expense_dict = {}
-    
     def CreateExpense(self, request, context):
         print(f"Create Expense's Request:\n{request}\n")
-        
-        # self.iterator += 1
-        # expense = expense_pb2.Expense(
-        #     id=self.iterator,
-        #     title=request.expense.title,
-        #     amount=request.expense.amount,
-        #     category=request.expense.category,
-        #     date=request.expense.date
-        # )
-        # self.expense_dict[self.iterator] = expense
-        
         expense = request.expense
-        new_id = db.insert_expense(
-            title=expense.title,
-            amount=expense.amount,
-            category=expense.category,
-            date=expense.date
-        )
-        
-        return CreateExpenseResponse(
-            id=new_id,
-            status=SuccessStatus(
-                code=0,
-                msg="SUCCESS --> CreateExpense"
+        try:
+            new_id = db.insert_expense(
+                title=expense.title,
+                amount=expense.amount,
+                category=expense.category,
+                date=expense.date
             )
-        )
+            return CreateExpenseResponse(
+                id=new_id,
+                status=SuccessStatus(
+                    code=0,
+                    msg="SUCCESS --> CreateExpense"
+                )
+            )
+        except Exception as e:
+            return CreateExpenseResponse(
+                id=-1,
+                status=SuccessStatus(
+                    code=1,
+                    msg="FAILURE --> CreateExpense"
+                )
+            )
     
     def DeleteExpense(self, request, context):
         print(f"Delete Expense's Request:\n{request}\n")
@@ -108,20 +101,10 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
     def ListExpenses(self, request, context):
         print(f"List Expenses' Request:\n{str(request).strip()}\n")
-        
-        # expenses_dict = self.expense_dict
-        # if str(request.date).strip():
-        #     # print("request has date!")
-        #     expenses_ids = [expense_value for expense_value in expenses_dict.values() if expense_value.date == request.date]
-        # else:
-        #     # print("get all!")
-        #     expenses_ids = [expense_value for expense_value in expenses_dict.values()]
-        
         if request.date.strip() == "":
             expenses_data = db.list_expenses()
         else:
             expenses_data = db.list_expenses(date=request.date)
-        
         expenses = [
             Expense(
                 id=row["id"],
@@ -132,7 +115,6 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
             )
             for row in expenses_data
         ]
-        
         return ListExpensesResponse(expenses=expenses)
     
 def serve():
