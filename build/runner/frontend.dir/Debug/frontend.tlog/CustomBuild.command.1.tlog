@@ -1,0 +1,10 @@
+^C:\USERS\FIAZM\DOCUMENTS\PERSONAL EXPENSE TRACKER\FRONTEND\WINDOWS\RUNNER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/fiazm/Documents/Personal Expense Tracker/frontend/windows" "-BC:/Users/fiazm/Documents/Personal Expense Tracker/build" --check-stamp-file "C:/Users/fiazm/Documents/Personal Expense Tracker/build/runner/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
