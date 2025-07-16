@@ -1,4 +1,4 @@
-# Personal Expense Tracker
+# Expense Tracker
 
 A full-stack expense tracking application built with Flutter frontend and Python gRPC backend, using PostgreSQL for data persistence.
 
