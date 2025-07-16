@@ -9,7 +9,8 @@ import generated.expense_pb2_grpc as expense_pb2_grpc
 
 from database import PostgresDB
 
-db = PostgresDB(db_name="postgres", user="postgres", password="mysecretpassword", host="localhost", port=5432)
+# Initialize database connection using environment variables
+db = PostgresDB()
 
 class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     

@@ -9,7 +9,7 @@
             "name": "Postgres Local",
             "database": "postgres",
             "username": "postgres",
-            "password": "password"
+            "askForPassword": true
         }
     ],
     "java.compile.nullAnalysis.mode": "automatic"

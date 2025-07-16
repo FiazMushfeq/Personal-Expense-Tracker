@@ -1,14 +1,20 @@
+import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class PostgresDB:
-    def __init__(self, db_name, user, password, host="localhost", port=5432):
+    def __init__(self, db_name=None, user=None, password=None, host=None, port=None):
+        # Use environment variables with fallback to parameters
         self.connection = psycopg2.connect(
-            dbname=db_name,
-            user=user,
-            password=password,
-            host=host,
-            port=port,
+            dbname=db_name or os.getenv('DB_NAME', 'postgres'),
+            user=user or os.getenv('DB_USER', 'postgres'),
+            password=password or os.getenv('DB_PASSWORD'),
+            host=host or os.getenv('DB_HOST', 'localhost'),
+            port=port or int(os.getenv('DB_PORT', '5432')),
             cursor_factory=RealDictCursor
         )
         self.connection.autocommit = True

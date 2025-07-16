@@ -24,7 +24,7 @@ Future<void> startBackendServer() async {
     final process = await Process.start(
       'python3',
       ['expense_tracker_server.py'],
-      workingDirectory: '/Users/fiazmushfeq/Desktop/Personal-Expense-Tracker/backend/python',
+      workingDirectory: '../backend/python',
       mode: ProcessStartMode.detached,
     );
 
