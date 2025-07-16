@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Backend Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/../backend/python/expense_tracker_server.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/../backend/python"
+        },
+        {
             "name": "personal_expense_tracker",
             "request": "launch",
             "type": "dart"
@@ -20,6 +28,13 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Full App (Backend + Frontend)",
+            "configurations": ["Backend Server", "personal_expense_tracker"],
+            "stopAll": true
         }
     ]
 }

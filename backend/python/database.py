@@ -23,6 +23,25 @@ class PostgresDB:
         self.cursor.execute(query, (title, amount, category, date))
         return self.cursor.fetchone()["id"]
 
+    def get_expense(self, expense_id):
+        query = "SELECT * FROM expenses WHERE id = %s;"
+        self.cursor.execute(query, (expense_id,))
+        return self.cursor.fetchone()
+
+    def update_expense(self, expense_id, title, amount, category, date):
+        query = """
+        UPDATE expenses 
+        SET title = %s, amount = %s, category = %s, expense_date = %s 
+        WHERE id = %s;
+        """
+        self.cursor.execute(query, (title, amount, category, date, expense_id))
+        return self.cursor.rowcount > 0
+
+    def delete_expense(self, expense_id):
+        query = "DELETE FROM expenses WHERE id = %s;"
+        self.cursor.execute(query, (expense_id,))
+        return self.cursor.rowcount > 0
+
     def list_expenses(self, date=None):
         if date:
             query = "SELECT * FROM expenses WHERE expense_date = %s;"

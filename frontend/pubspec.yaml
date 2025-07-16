@@ -1,23 +1,24 @@
 name: personal_expense_tracker
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  grpc: ^4.0.1
+  grpc: ^4.1.0
   intl: ^0.20.1
-  protobuf: ^3.1.0
+  protobuf: ^4.1.0
   fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  protoc_plugin: ^22.0.0
 
 flutter:
   uses-material-design: true

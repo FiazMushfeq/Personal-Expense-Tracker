@@ -24,14 +24,14 @@ class ExpenseClient {
   Future<SuccessStatus> createExpense(Expense expense) async {
     final request = CreateExpenseRequest()..expense = expense;
     // print(total);
-    
+
     try {
       final response = await stub.createExpense(request);
       // print(response);
       total += 1;
       // print("Total Count: $total");
       return response.status;
-    } catch(e) {
+    } catch (e) {
       print('Error-Create: $e');
       return SuccessStatus()..code = 1;
     }
@@ -39,11 +39,11 @@ class ExpenseClient {
 
   Future<void> deleteExpense(int id) async {
     final request = DeleteExpenseRequest()..id = id;
-    
+
     try {
       final response = await stub.deleteExpense(request);
       // print(response);
-    } catch(e) {
+    } catch (e) {
       print('Error-Delete: $e');
     }
   }
@@ -54,19 +54,19 @@ class ExpenseClient {
     try {
       final response = await stub.updateExpense(request);
       // print(response);
-    } catch(e) {
+    } catch (e) {
       print('Error-Update: $e');
     }
   }
 
   Future<Expense> getExpense(int id) async {
     final request = GetExpenseRequest()..id = id;
-  
+
     try {
       final response = await stub.getExpense(request);
       // print(response);
-      return response.expenses;
-    } catch(e) {
+      return response.expense;
+    } catch (e) {
       print('Error-Get: $e');
       return Expense();
     }
@@ -79,7 +79,7 @@ class ExpenseClient {
       final response = await stub.listExpenses(request);
       // print(response);
       return response.expenses;
-    } catch(e) {
+    } catch (e) {
       print('Error-List: $e');
       return [];
     }

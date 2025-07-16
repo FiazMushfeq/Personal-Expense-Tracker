@@ -8,7 +8,9 @@ class HomePage extends StatelessWidget {
 
   Future<List<Expense>> _fetchExpenses() async {
     DateTime today = DateTime.now();
-    String currentDate = '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+    String currentDate =
+        '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+    print(currentDate);
     return await expenseClient.listExpenses(currentDate);
   }
 
@@ -54,7 +56,8 @@ class HomePage extends StatelessWidget {
                       final expense = expenses[index];
                       return ListTile(
                         title: Text(expense.title),
-                        subtitle: Text('${expense.category} - \$${expense.amount.toStringAsFixed(2)}'),
+                        subtitle: Text(
+                            '${expense.category} - \$${expense.amount.toStringAsFixed(2)}'),
                         trailing: Text(expense.date),
                       );
                     },

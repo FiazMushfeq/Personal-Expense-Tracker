@@ -1,13 +1,14 @@
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: expense.proto
-//
-// @dart = 2.12
+// Generated from schema/expense.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -159,15 +160,15 @@ final $typed_data.Uint8List updateExpenseResponseDescriptor = $convert.base64Dec
 const GetExpenseResponse$json = {
   '1': 'GetExpenseResponse',
   '2': [
-    {'1': 'expenses', '3': 1, '4': 1, '5': 11, '6': '.Expense', '10': 'expenses'},
+    {'1': 'expense', '3': 1, '4': 1, '5': 11, '6': '.Expense', '10': 'expense'},
     {'1': 'status', '3': 2, '4': 1, '5': 11, '6': '.SuccessStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `GetExpenseResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getExpenseResponseDescriptor = $convert.base64Decode(
-    'ChJHZXRFeHBlbnNlUmVzcG9uc2USJAoIZXhwZW5zZXMYASABKAsyCC5FeHBlbnNlUghleHBlbn'
-    'NlcxImCgZzdGF0dXMYAiABKAsyDi5TdWNjZXNzU3RhdHVzUgZzdGF0dXM=');
+    'ChJHZXRFeHBlbnNlUmVzcG9uc2USIgoHZXhwZW5zZRgBIAEoCzIILkV4cGVuc2VSB2V4cGVuc2'
+    'USJgoGc3RhdHVzGAIgASgLMg4uU3VjY2Vzc1N0YXR1c1IGc3RhdHVz');
 
 @$core.Deprecated('Use listExpensesResponseDescriptor instead')
 const ListExpensesResponse$json = {
