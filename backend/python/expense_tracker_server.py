@@ -12,6 +12,35 @@ from database import PostgresDB
 # Initialize database connection using environment variables
 db = PostgresDB()
 
+# Category mapping between string names and enum values
+CATEGORY_TO_ENUM = {
+    'Food': ExpenseCategory.FOOD,
+    'Transportation': ExpenseCategory.TRANSPORT,
+    'Shopping': ExpenseCategory.SHOPPING,
+    'Entertainment': ExpenseCategory.ENTERTAINMENT,
+    'Bills': ExpenseCategory.BILLS,
+    'Education': ExpenseCategory.EDUCATION,
+    'Health': ExpenseCategory.HEALTH,
+    'Other': ExpenseCategory.OTHER
+}
+
+ENUM_TO_CATEGORY = {
+    ExpenseCategory.FOOD: 'Food',
+    ExpenseCategory.TRANSPORT: 'Transportation',
+    ExpenseCategory.SHOPPING: 'Shopping',
+    ExpenseCategory.ENTERTAINMENT: 'Entertainment',
+    ExpenseCategory.BILLS: 'Bills',
+    ExpenseCategory.EDUCATION: 'Education',
+    ExpenseCategory.HEALTH: 'Health',
+    ExpenseCategory.OTHER: 'Other'
+}
+
+def get_category_string(category_enum):
+    return ENUM_TO_CATEGORY.get(category_enum, 'Other')
+
+def get_category_enum(category_string):
+    return CATEGORY_TO_ENUM.get(category_string, ExpenseCategory.OTHER)
+
 class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
     
     def CreateExpense(self, request, context):
@@ -19,9 +48,9 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
         expense = request.expense
         try:
             new_id = db.insert_expense(
-                title=expense.title,
+                description=expense.title,
                 amount=expense.amount,
-                category=expense.category,
+                category=get_category_string(expense.category),
                 date=expense.date
             )
             return CreateExpenseResponse(
@@ -74,9 +103,9 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
             expense = request.expense
             success = db.update_expense(
                 expense_id=expense.id,
-                title=expense.title,
+                description=expense.title,
                 amount=expense.amount,
-                category=expense.category,
+                category=get_category_string(expense.category),
                 date=expense.date
             )
             if success:
@@ -110,9 +139,9 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
             if expense_data:
                 expense = Expense(
                     id=int(expense_data["id"]),
-                    title=str(expense_data["title"]),
+                    title=str(expense_data["description"]),
                     amount=float(expense_data["amount"]),
-                    category=int(expense_data["category"]),
+                    category=get_category_enum(expense_data["category"]),
                     date=str(expense_data["expense_date"])
                 )
                 response = GetExpenseResponse(
@@ -151,9 +180,9 @@ class ExpenseTrackerServicer(expense_pb2_grpc.ExpenseTrackerServicer):
             expenses = [
                 Expense(
                     id=int(row["id"]),
-                    title=str(row["title"]),
+                    title=str(row["description"]),
                     amount=float(row["amount"]),
-                    category=int(row["category"]),
+                    category=get_category_enum(row["category"]),
                     date=str(row["expense_date"])
                 )
                 for row in expenses_data

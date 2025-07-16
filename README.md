@@ -60,9 +60,9 @@ Personal-Expense-Tracker/
 
 1. Create PostgreSQL database:
    ```sql
-   CREATE DATABASE postgres;
-   CREATE USER postgres WITH PASSWORD 'your_secure_password';
-   GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;
+   CREATE DATABASE expenses_db;
+   CREATE USER expense_user WITH PASSWORD 'your_secure_password';
+   GRANT ALL PRIVILEGES ON DATABASE expenses_db TO expense_user;
    ```
 
 2. Verify connection:
@@ -174,8 +174,8 @@ The application uses environment variables for secure configuration. All sensiti
 
 ```bash
 # Database Configuration
-DB_NAME=postgres
-DB_USER=postgres
+DB_NAME=expenses_db
+DB_USER=expense_user
 DB_PASSWORD=your_secure_password
 DB_HOST=localhost
 DB_PORT=5432

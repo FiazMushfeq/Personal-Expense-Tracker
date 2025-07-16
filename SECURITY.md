@@ -14,8 +14,8 @@ This project now uses environment variables to securely manage database credenti
 2. **Update the `.env` file with your actual credentials:**
    ```bash
    # Database Configuration
-   DB_NAME=postgres
-   DB_USER=postgres
+   DB_NAME=expenses_db
+   DB_USER=expense_user
    DB_PASSWORD=your_actual_secure_password
    DB_HOST=localhost
    DB_PORT=5432

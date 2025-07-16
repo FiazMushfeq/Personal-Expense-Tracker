@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "C:/Users/fiazm/Documents/Personal Expense Tracker/frontend/windows",
+    "cmake.sourceDirectory": "${workspaceFolder}/frontend/windows",
     "sqltools.connections": [
         {
             "previewLimit": 50,
