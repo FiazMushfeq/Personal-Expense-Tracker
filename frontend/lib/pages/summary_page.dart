@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:personal_expense_tracker/generated/expense.pb.dart';
-import 'package:personal_expense_tracker/services/expense.tracker.client.dart';
+import 'package:expense_tracker/generated/expense.pb.dart';
+import 'package:expense_tracker/services/expense.tracker.client.dart';
 
 class SummaryPage extends StatelessWidget {
   final ExpenseClient expenseClient;

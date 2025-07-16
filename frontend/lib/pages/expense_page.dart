@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/forms/expense_form.dart';
+import 'package:expense_tracker/forms/expense_form.dart';
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({super.key});

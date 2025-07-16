@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/pages/expense_page.dart';
-import 'package:personal_expense_tracker/pages/home_page.dart';
-import 'package:personal_expense_tracker/pages/summary_page.dart';
-import 'package:personal_expense_tracker/services/expense.tracker.client.dart';
+import 'package:expense_tracker/pages/expense_page.dart';
+import 'package:expense_tracker/pages/home_page.dart';
+import 'package:expense_tracker/pages/summary_page.dart';
+import 'package:expense_tracker/services/expense.tracker.client.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});
