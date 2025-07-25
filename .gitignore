@@ -1,5 +1,6 @@
 # Environment variables
 .env
+.env.*
 
 # Python
 __pycache__/
@@ -40,6 +41,7 @@ Thumbs.db
 # Database
 *.db
 *.sqlite3
+*.pgsql
 
 # Logs
 *.log
@@ -47,3 +49,21 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Flutter/Dart
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.dart_tool/
+build/
+generated_plugin_registrant.dart
+
+# macOS/iOS build
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/build/
+macos/Flutter/ephemeral/
+macos/build/
