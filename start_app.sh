@@ -1,9 +1,19 @@
 #!/bin/bash
 
-# Personal Expense Tracker Startup Script
+# Check if PostgreSQL is running, and start it if not (for Homebrew installations)
+if ! pg_isready -q; then
+  echo "PostgreSQL is not running. Attempting to start..."
+  brew services start postgresql
+  # Wait a few seconds for PostgreSQL to start
+  sleep 3
+else
+  echo "PostgreSQL is already running.\n"
+fi
+
+# Expense Tracker Startup Script
 # This script starts both the backend server and Flutter frontend
 
-echo "Starting Personal Expense Tracker..."
+echo "Starting Expense Tracker...\n"
 
 # Function to check if server is running
 check_server() {
@@ -48,7 +58,7 @@ start_backend() {
 
 # Function to start frontend
 start_frontend() {
-    echo "Starting Flutter frontend..."
+    echo "Starting Flutter frontend...\n"
     cd frontend
     flutter run
 }
