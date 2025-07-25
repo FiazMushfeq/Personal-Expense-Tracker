@@ -7,13 +7,13 @@ if ! pg_isready -q; then
   # Wait a few seconds for PostgreSQL to start
   sleep 3
 else
-  echo "PostgreSQL is already running.\n"
+  echo -e "PostgreSQL is already running.\n"
 fi
 
 # Expense Tracker Startup Script
 # This script starts both the backend server and Flutter frontend
 
-echo "Starting Expense Tracker...\n"
+echo -e "Starting Expense Tracker...\n"
 
 # Function to check if server is running
 check_server() {
@@ -58,14 +58,14 @@ start_backend() {
 
 # Function to start frontend
 start_frontend() {
-    echo "Starting Flutter frontend...\n"
+    echo -e "Starting Flutter frontend...\n"
     cd frontend
     flutter run
 }
 
 # Function to cleanup on exit
 cleanup() {
-    echo "\nShutting down..."
+    echo -e "\nShutting down..."
     if [ ! -z "$BACKEND_PID" ]; then
         echo "Stopping backend server (PID: $BACKEND_PID)"
         kill $BACKEND_PID 2>/dev/null
