@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: expense_db
+      POSTGRES_USER: expense_user
+      POSTGRES_PASSWORD: expense_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend/python
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: expense_db
+      DB_USER: expense_user
+      DB_PASSWORD: expense_pass
+    ports:
+      - "50051:50051"
+    working_dir: /app
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+    environment:
+      BACKEND_HOST: backend
+      BACKEND_PORT: 50051
+    working_dir: /app
+    platform: linux/amd64
+
+volumes:
+  db_data:
