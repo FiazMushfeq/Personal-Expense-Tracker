@@ -1,12 +1,15 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy all backend code and requirements
+COPY . /app
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
+# Expose gRPC port
 EXPOSE 50051
 
+# Start the gRPC server
 CMD ["python", "expense_tracker_server.py"]

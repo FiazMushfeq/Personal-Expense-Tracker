@@ -26,19 +26,13 @@ services:
       - "50051:50051"
     working_dir: /app
 
-  # Run app from Flutter desktop app
-
-  # frontend:
-  #   build: ./frontend
-  #   depends_on:
-  #     - backend
-  #   ports:
-  #     - "8080:8080"
-  #   environment:
-  #     BACKEND_HOST: backend
-  #     BACKEND_PORT: 50051
-  #   working_dir: /app
-  #   platform: linux/amd64
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80" # Serve Nginx on port 8081
+    working_dir: /app
 
 volumes:
   db_data:

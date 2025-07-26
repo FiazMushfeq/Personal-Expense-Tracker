@@ -189,9 +189,9 @@ cd frontend
 flutter run
 ```
 
-## 🐳 Running Backend and Database with Docker
+## 🐳 Running Backend, Database, and gRPC-Web Proxy with Docker
 
-You can run the backend and PostgreSQL database as containers using Docker Compose for easier setup and isolation.
+You can run the backend, PostgreSQL database, **and Envoy gRPC-Web proxy** as containers using Docker Compose for easier setup and browser compatibility.
 
 ### Prerequisites
 
@@ -209,20 +209,27 @@ You can run the backend and PostgreSQL database as containers using Docker Compo
 
    - PostgreSQL database (with sample data if `create_expenses_table.sql` is present)
    - Python gRPC backend server
+   - Envoy proxy for gRPC-Web (enables browser access to backend)
 
 2. **Access the services:**
 
+   - **Frontend (Flutter web):** [http://localhost:8081](http://localhost:8081)
+   - **Envoy gRPC-Web proxy:** [http://localhost:8080](http://localhost:8080)
    - **Backend gRPC server:** `localhost:50051`
    - **Database:** `localhost:5432`
 
-3. **Run the Flutter frontend (desktop or mobile):**
+3. **Run the Flutter frontend (web):**
+
+   If using Docker Compose, the frontend is served at [http://localhost:8081](http://localhost:8081).
+
+   If running locally (not in Docker):
 
    ```bash
    cd frontend
-   flutter run
+   flutter run -d chrome
    ```
 
-   > The frontend will connect to the backend at `localhost:50051`.
+   > The frontend will connect to the backend via Envoy at `http://localhost:8080` using gRPC-Web.
 
 4. **Stopping the containers:**
    ```bash
@@ -231,13 +238,44 @@ You can run the backend and PostgreSQL database as containers using Docker Compo
 
 ### Notes
 
+- The Envoy proxy enables browser-based gRPC-Web requests to reach your backend.
 - The database container will automatically initialize the schema and sample data if `create_expenses_table.sql` is mounted.
 - The backend connects to the database using the environment variables defined in `docker-compose.yml`.
 - You can inspect logs with:
   ```bash
   docker-compose logs backend
   docker-compose logs db
+  docker-compose logs envoy
   ```
+
+---
+
+## 🕸️ gRPC-Web Architecture
+
+- **Frontend (Flutter Web)** → **Envoy Proxy (gRPC-Web)** → **Backend (Python gRPC)** → **PostgreSQL Database**
+- Envoy translates browser gRPC-Web requests to standard gRPC for the backend.
+
+---
+
+## 🔧 Configuration
+
+### Envoy Proxy Configuration
+
+- **Envoy Port**: 8080 (gRPC-Web)
+- **Backend Port**: 50051 (gRPC)
+- **Frontend Port**: 8081 (Nginx/Flutter web)
+
+See [`envoy.yaml`](envoy.yaml) for proxy setup details.
+
+---
+
+## 🚦 Browser Compatibility
+
+- **Flutter web** uses gRPC-Web via Envoy, allowing browser clients to communicate with the backend securely and efficiently.
+
+---
+
+*Add these sections to your README to document gRPC-Web support and Docker Compose integration for browser-based access.*
 
 ## 🔧 Configuration
 
