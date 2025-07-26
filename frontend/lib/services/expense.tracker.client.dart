@@ -1,23 +1,17 @@
-// import 'dart:math';
-
 import 'dart:math';
 
-import 'package:grpc/grpc.dart';
 import '../generated/expense.pbgrpc.dart';
 
+// Conditional import for platform-specific channel
+import 'client_channel_io.dart'
+    if (dart.library.html) 'client_channel_web.dart';
+
 class ExpenseClient {
-  final ClientChannel channel;
+  final channel;
   late final ExpenseTrackerClient stub;
   int total = 0;
 
-  ExpenseClient()
-      : channel = ClientChannel(
-          'localhost',
-          port: 50051,
-          options: const ChannelOptions(
-            credentials: ChannelCredentials.insecure(),
-          ),
-        ) {
+  ExpenseClient() : channel = getChannel() {
     stub = ExpenseTrackerClient(channel);
   }
 
