@@ -2,6 +2,22 @@
 
 A full-stack expense tracking application built with Flutter frontend and Python gRPC backend, using PostgreSQL for data persistence.
 
+## 📸 Screenshots
+
+Below are screenshots showing the flow of the Expense Tracker app:
+
+### Home Page
+
+![Expense Tracker's Home Page](screenshots/homepage.png)
+
+### Expense Form
+
+![Expense Form](screenshots/expenseform.png)
+
+### Expense Summary
+
+![Expense Tracker's Summary](screenshots/expensesummary.png)
+
 ## 🏗️ Architecture
 
 - **Frontend**: Flutter (Dart) - Cross-platform mobile and desktop UI
@@ -40,6 +56,7 @@ Personal-Expense-Tracker/
 ### Prerequisites
 
 1. **PostgreSQL** - Database server
+
    ```bash
    # Install PostgreSQL (macOS)
    brew install postgresql
@@ -47,6 +64,7 @@ Personal-Expense-Tracker/
    ```
 
 2. **Python 3.8+** with virtual environment
+
    ```bash
    python3 --version
    ```
@@ -59,6 +77,7 @@ Personal-Expense-Tracker/
 ### Database Setup
 
 1. Create PostgreSQL database:
+
    ```sql
    CREATE DATABASE expenses_db;
    CREATE USER expense_user WITH PASSWORD 'your_secure_password';
@@ -73,11 +92,13 @@ Personal-Expense-Tracker/
 ### Security Setup
 
 1. Copy the environment template:
+
    ```bash
    cp .env.example .env
    ```
 
 2. Update `.env` with your actual database credentials:
+
    ```bash
    # Edit the .env file with your secure password
    DB_PASSWORD=your_secure_password
@@ -90,11 +111,13 @@ Personal-Expense-Tracker/
 ### Backend Setup
 
 1. Navigate to backend directory:
+
    ```bash
    cd backend/python
    ```
 
 2. Create and activate virtual environment:
+
    ```bash
    python3 -m venv venv
    source venv/bin/activate
@@ -108,6 +131,7 @@ Personal-Expense-Tracker/
 ### Frontend Setup
 
 1. Navigate to frontend directory:
+
    ```bash
    cd frontend
    ```
@@ -126,6 +150,7 @@ Personal-Expense-Tracker/
 ```
 
 This script automatically:
+
 - Checks if the backend server is running
 - Starts the Python server with virtual environment
 - Launches the Flutter frontend
@@ -150,6 +175,7 @@ The Flutter app automatically starts the backend server before launching the UI.
 ### Method 4: Manual Start
 
 **Terminal 1 - Backend:**
+
 ```bash
 cd backend/python
 source venv/bin/activate
@@ -157,19 +183,72 @@ python3 expense_tracker_server.py
 ```
 
 **Terminal 2 - Frontend:**
+
 ```bash
 cd frontend
 flutter run
 ```
 
+## 🐳 Running Backend and Database with Docker
+
+You can run the backend and PostgreSQL database as containers using Docker Compose for easier setup and isolation.
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed on your machine.
+
+### Quick Start with Docker Compose
+
+1. **Build and start the containers:**
+
+   ```bash
+   docker-compose up --build
+   ```
+
+   This will start:
+
+   - PostgreSQL database (with sample data if `create_expenses_table.sql` is present)
+   - Python gRPC backend server
+
+2. **Access the services:**
+
+   - **Backend gRPC server:** `localhost:50051`
+   - **Database:** `localhost:5432`
+
+3. **Run the Flutter frontend (desktop or mobile):**
+
+   ```bash
+   cd frontend
+   flutter run
+   ```
+
+   > The frontend will connect to the backend at `localhost:50051`.
+
+4. **Stopping the containers:**
+   ```bash
+   docker-compose down
+   ```
+
+### Notes
+
+- The database container will automatically initialize the schema and sample data if `create_expenses_table.sql` is mounted.
+- The backend connects to the database using the environment variables defined in `docker-compose.yml`.
+- You can inspect logs with:
+  ```bash
+  docker-compose logs backend
+  docker-compose logs db
+  ```
+
 ## 🔧 Configuration
 
 ### Server Configuration
+
 - **Backend Port**: 50051 (gRPC)
 - **Database**: localhost:5432
 - **Host**: localhost
 
 ### Environment Variables
+
 The application uses environment variables for secure configuration. All sensitive data is stored in the `.env` file:
 
 ```bash
@@ -186,16 +265,6 @@ GRPC_PORT=50051
 
 **Security Note**: The `.env` file is automatically excluded from version control. See [SECURITY.md](SECURITY.md) for detailed security guidelines.
 
-## 📱 Features
-
-- ✅ Create, read, update, delete expenses
-- ✅ Categorize expenses
-- ✅ Date-based filtering
-- ✅ Real-time data synchronization
-- ✅ Cross-platform support (macOS, Windows, Linux, iOS, Android)
-- ✅ Automatic backend server startup
-- ✅ Dark/Light theme support
-
 ## 🛠️ Development
 
 ### Generating gRPC Code
@@ -203,12 +272,14 @@ GRPC_PORT=50051
 If you modify the `schema/expense.proto` file:
 
 **Python:**
+
 ```bash
 cd backend/python
 python -m grpc_tools.protoc --proto_path=../../schema --python_out=generated --grpc_python_out=generated ../../schema/expense.proto
 ```
 
 **Dart:**
+
 ```bash
 cd frontend
 protoc --dart_out=grpc:lib/generated -I../schema ../schema/expense.proto
@@ -232,6 +303,7 @@ CREATE TABLE expenses (
 ### Adding Dependencies
 
 **Python:**
+
 ```bash
 cd backend/python
 source venv/bin/activate
@@ -240,42 +312,11 @@ pip freeze > requirements.txt
 ```
 
 **Flutter:**
+
 ```bash
 cd frontend
 flutter pub add package_name
 ```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **"Connection refused" error**
-   - Ensure PostgreSQL is running: `brew services start postgresql`
-   - Check if backend server started: `lsof -i :50051`
-
-2. **"Permission denied" for start_app.sh**
-   ```bash
-   chmod +x start_app.sh
-   ```
-
-3. **Python module not found**
-   ```bash
-   cd backend/python
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-4. **Flutter build issues**
-   ```bash
-   cd frontend
-   flutter clean
-   flutter pub get
-   ```
-
-5. **gRPC connection issues**
-   - Verify server is running on port 50051
-   - Check firewall settings
-   - Ensure localhost resolution
 
 ### Logs and Debugging
 
@@ -286,22 +327,3 @@ flutter pub add package_name
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📞 Support
-
-For support and questions:
-- Check the [AUTO_START_GUIDE.md](AUTO_START_GUIDE.md) for detailed startup instructions
-- Review the troubleshooting section above
-- Open an issue in the repository
-
----
-
-**Happy expense tracking! 💰📊**

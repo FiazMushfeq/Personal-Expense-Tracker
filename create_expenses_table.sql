@@ -1,4 +1,4 @@
--- Create expenses table for Personal Expense Tracker
+-- Create expenses table for Expense Tracker
 -- Run this script in your expenses_db database
 
 CREATE TABLE IF NOT EXISTS expenses (

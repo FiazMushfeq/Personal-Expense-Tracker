@@ -10,6 +10,7 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./create_expenses_table.sql:/docker-entrypoint-initdb.d/create_expenses_table.sql # Automatically create the expenses table on startup
 
   backend:
     build: ./backend/python
@@ -25,17 +26,19 @@ services:
       - "50051:50051"
     working_dir: /app
 
-  frontend:
-    build: ./frontend
-    depends_on:
-      - backend
-    ports:
-      - "8080:8080"
-    environment:
-      BACKEND_HOST: backend
-      BACKEND_PORT: 50051
-    working_dir: /app
-    platform: linux/amd64
+  # Run app from Flutter desktop app
+
+  # frontend:
+  #   build: ./frontend
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     BACKEND_HOST: backend
+  #     BACKEND_PORT: 50051
+  #   working_dir: /app
+  #   platform: linux/amd64
 
 volumes:
   db_data:
