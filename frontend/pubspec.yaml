@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   grpc: ^4.1.0
+  # grpc_web: ^0.3.4
   intl: ^0.20.1
   protobuf: ^4.1.0
   fl_chart: ^0.68.0
