@@ -56,6 +56,15 @@ start_backend() {
     cd ../..
 }
 
+# Function to start Envoy proxy
+start_envoy() {
+    echo "Starting Envoy proxy..."
+    envoy -c envoy.yaml &
+    ENVOY_PID=$!
+    echo "Envoy proxy started with PID: $ENVOY_PID"
+    sleep 2
+}
+
 # Function to start frontend
 start_frontend() {
     echo -e "Starting Flutter frontend...\n"
@@ -87,6 +96,9 @@ if check_server; then
 else
     start_backend
 fi
+
+# Start Envoy proxy
+start_envoy
 
 # Start frontend
 start_frontend

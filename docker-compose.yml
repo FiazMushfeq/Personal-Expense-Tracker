@@ -34,5 +34,15 @@ services:
       - "8081:80" # Serve Nginx on port 8081
     working_dir: /app
 
+  envoy:
+    image: envoyproxy/envoy:v1.33-latest
+    ports:
+      - "8080:8080"
+      - "9901:9901"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    depends_on:
+      - backend
+
 volumes:
   db_data:

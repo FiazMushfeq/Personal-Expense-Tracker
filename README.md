@@ -6,17 +6,33 @@ A full-stack expense tracking application built with Flutter frontend and Python
 
 Below are screenshots showing the flow of the Expense Tracker app:
 
+## MacOS App
+
 ### Home Page
 
-![Expense Tracker's Home Page](screenshots/homepage.png)
+![MacOS App - Expense Tracker's Home Page](screenshots/homepage.png)
 
 ### Expense Form
 
-![Expense Form](screenshots/expenseform.png)
+![MacOS App - Expense Form](screenshots/expenseform.png)
 
 ### Expense Summary
 
-![Expense Tracker's Summary](screenshots/expensesummary.png)
+![MacOS App - Expense Tracker's Summary](screenshots/expensesummary.png)
+
+## Chrome Browser from Dockers
+
+### Home Page
+
+![Browser from Docker - Expense Tracker's Home Page](screenshots/docker-home.png)
+
+### Expense Form
+
+![Browser from Docker - Expense Form](screenshots/docker-form.png)
+
+### Expense Summary
+
+![Browser from Docker - Expense Tracker's Summary](screenshots/docker-summary.png)
 
 ## 🏗️ Architecture
 
@@ -275,7 +291,7 @@ See [`envoy.yaml`](envoy.yaml) for proxy setup details.
 
 ---
 
-*Add these sections to your README to document gRPC-Web support and Docker Compose integration for browser-based access.*
+_Add these sections to your README to document gRPC-Web support and Docker Compose integration for browser-based access._
 
 ## 🔧 Configuration
 
@@ -355,6 +371,35 @@ pip freeze > requirements.txt
 cd frontend
 flutter pub add package_name
 ```
+
+## 🐳 Full Docker Support
+
+You can use Docker Compose to run **every part of the application**—the database, backend, Envoy proxy, and even the Flutter web frontend.  
+This means you do **not** need to install Python, PostgreSQL, or Flutter SDK locally; everything runs in containers.
+
+**To start all services (including frontend) with Docker:**
+
+```bash
+docker-compose up --build
+```
+
+- **Frontend (Flutter web)** is served at [http://localhost:8081](http://localhost:8081)
+- **Envoy gRPC-Web proxy** is at [http://localhost:8080](http://localhost:8080)
+- **Backend (Python gRPC)** is at `localhost:50051`
+- **Database (PostgreSQL)** is at `localhost:5432`
+
+---
+
+## 🌐 Browser Compatibility with gRPC-Web
+
+The application works in your browser thanks to **Envoy's gRPC-Web support**:
+
+- The Flutter web frontend communicates with the backend using gRPC-Web via Envoy.
+- This enables efficient, secure, and real-time communication between your browser and the backend.
+
+---
+
+You can develop, test, and use the Expense Tracker entirely in your browser, with all services running in Docker containers and gRPC-Web enabled for seamless frontend-backend integration.
 
 ### Logs and Debugging
 
