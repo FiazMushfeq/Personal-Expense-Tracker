@@ -172,6 +172,37 @@ This script automatically:
 
 ### Method 2: Flutter Auto-Start
 
+```
+┌──────────────────┐
+│   User/Browser   │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│  Flutter Frontend│
+│ (flutter run)    │
+└────────┬─────────┘
+         │   HTTP requests
+         ▼
+┌──────────────────┐
+│   Envoy Proxy    │
+│ (envoy.yaml)     │
+└────────┬─────────┘
+         │   HTTP/gRPC requests
+         ▼
+┌──────────────────┐
+│  Backend Server  │
+│ (Python/gRPC or  │
+│  HTTP, port 50051│
+└────────┬─────────┘
+         │   SQL
+         ▼
+┌──────────────────┐
+│ PostgreSQL DB    │
+│ (localhost:5432) │
+└──────────────────┘
+```
+
 ```bash
 cd frontend
 flutter run
@@ -212,6 +243,38 @@ You can run the backend, PostgreSQL database, **and Envoy gRPC-Web proxy** as co
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed on your machine.
 
 ### Quick Start with Docker Compose
+
+```
+                        (User's Browser)
+                               │
+                               │  (HTTP)
+                               ▼
+                      ┌────────────────────┐
+                      │    Envoy Proxy     │
+                      │  (envoy:8080/9901) │
+                      └───────┬────────────┘
+                      │       │
+    (HTTP: API/UI)    │       │  (gRPC/HTTP: 50051)
+   ┌──────────────────┘       ▼
+   │                 ┌────────────────────┐
+   │                 │     Backend        │
+   │                 │  (Python:50051)    │
+   │                 └────────┬───────────┘
+   │                          │
+   │                          │ (SQL: 5432)
+   │                          ▼
+   │                 ┌────────────────────┐
+   │                 │   PostgreSQL DB    │
+   │                 │  (postgres:5432)   │
+   │                 └────────────────────┘
+   │
+   │ (HTTP: 80)
+   ▼
+┌────────────────────┐
+│     Frontend       │
+│   (Nginx:8081/80)  │
+└────────────────────┘
+```
 
 1. **Build and start the containers:**
 
