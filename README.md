@@ -193,7 +193,7 @@ This script automatically:
 ┌──────────────────┐
 │  Backend Server  │
 │ (Python/gRPC or  │
-│  HTTP, port 50051│
+│ HTTP, port 50051)│
 └────────┬─────────┘
          │   SQL
          ▼
