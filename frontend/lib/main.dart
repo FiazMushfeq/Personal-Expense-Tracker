@@ -6,8 +6,20 @@ void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  ThemeMode _themeMode = ThemeMode.dark;
+  void _toggleTheme(bool isDarkMode) {
+    setState(() {
+      _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +52,11 @@ class MainApp extends StatelessWidget {
           iconColor: Colors.white70,
         ),
       ),
-      themeMode: ThemeMode.dark,
-      home: const WidgetTree(),
+      themeMode: _themeMode,
+      home: WidgetTree(
+        isDarkMode: _themeMode == ThemeMode.dark,
+        onThemeToggle: _toggleTheme,
+      ),
     );
   }
 }
